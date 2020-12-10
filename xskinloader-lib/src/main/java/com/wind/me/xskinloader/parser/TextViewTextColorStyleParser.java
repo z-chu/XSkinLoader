@@ -56,16 +56,22 @@ public class TextViewTextColorStyleParser implements ISkinStyleParser{
 
     private static int[] getTextViewStyleableList() {
         if (sTextViewStyleList == null || sTextViewStyleList.length == 0) {
-            sTextViewStyleList = (int[]) ReflectUtils.getField("com.android.internal.R$styleable", "TextView");
+            try {
+                sTextViewStyleList = (int[]) ReflectUtils.getField("com.android.internal.R$styleable", "TextView");
+            }catch (Exception ignored){
+            }
         }
         return sTextViewStyleList;
     }
 
     private static Integer getTextViewTextColorStyleableIndex() {
         if (sTextViewTextColorStyleIndex == 0) {
-            Object o = ReflectUtils.getField("com.android.internal.R$styleable", "TextView_textColor");
-            if (o != null) {
-                sTextViewTextColorStyleIndex = (int) o;
+            try {
+                Object o = ReflectUtils.getField("com.android.internal.R$styleable", "TextView_textColor");
+                if (o != null) {
+                    sTextViewTextColorStyleIndex = (int) o;
+                }
+            }catch (Exception ignored){
             }
         }
         return sTextViewTextColorStyleIndex;
