@@ -66,7 +66,7 @@ public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStylePa
     }
 
     private static Integer getProgressBarIndeterminateDrawableIndex() {
-        if (sProgressBarIndeterminateDrawableIndex == 0) {
+        if (sProgressBarIndeterminateDrawableIndex == null) {
             try {
                 Object o = ReflectUtils.getField("com.android.internal.R$styleable", "ProgressBar_indeterminateDrawable");
                 if (o != null) {

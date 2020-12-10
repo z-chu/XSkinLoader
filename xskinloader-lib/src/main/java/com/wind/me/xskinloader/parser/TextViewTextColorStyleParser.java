@@ -65,7 +65,7 @@ public class TextViewTextColorStyleParser implements ISkinStyleParser{
     }
 
     private static Integer getTextViewTextColorStyleableIndex() {
-        if (sTextViewTextColorStyleIndex == 0) {
+        if (sTextViewTextColorStyleIndex == null) {
             try {
                 Object o = ReflectUtils.getField("com.android.internal.R$styleable", "TextView_textColor");
                 if (o != null) {
