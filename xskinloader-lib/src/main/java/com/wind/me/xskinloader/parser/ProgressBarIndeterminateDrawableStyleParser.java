@@ -19,10 +19,10 @@ import java.util.Map;
  * Created by Windy on 2018/1/23.
  */
 
-public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStyleParser{
+public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStyleParser {
 
-    private static int[] sProgressBarStyleList;
-    private static int sProgressBarIndeterminateDrawableIndex;
+    private static int[] sProgressBarStyleList = null;
+    private static Integer sProgressBarIndeterminateDrawableIndex = null;
 
     @Override
     public void parseXmlStyle(View view, AttributeSet attrs, Map<String, SkinAttr> viewAttrs, String[] specifiedAttrList) {
@@ -31,8 +31,10 @@ public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStylePa
         }
         Context context = view.getContext();
         int[] progressBarStyleList = getProgressBarStyleable();
-        int progressBarIndeterminateDrawableIndex = getProgressBarIndeterminateDrawableIndex();
-
+        Integer progressBarIndeterminateDrawableIndex = getProgressBarIndeterminateDrawableIndex();
+        if (progressBarStyleList == null || progressBarIndeterminateDrawableIndex == null) {
+            return;
+        }
         final TypedArray a = context.obtainStyledAttributes(attrs, progressBarStyleList, 0, 0);
 
         if (a != null) {
@@ -54,12 +56,12 @@ public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStylePa
 
     private static int[] getProgressBarStyleable() {
         if (sProgressBarStyleList == null || sProgressBarStyleList.length == 0) {
-            sProgressBarStyleList = (int[])ReflectUtils.getField("com.android.internal.R$styleable", "ProgressBar");
+            sProgressBarStyleList = (int[]) ReflectUtils.getField("com.android.internal.R$styleable", "ProgressBar");
         }
         return sProgressBarStyleList;
     }
 
-    private static int getProgressBarIndeterminateDrawableIndex() {
+    private static Integer getProgressBarIndeterminateDrawableIndex() {
         if (sProgressBarIndeterminateDrawableIndex == 0) {
             Object o = ReflectUtils.getField("com.android.internal.R$styleable", "ProgressBar_indeterminateDrawable");
             if (o != null) {

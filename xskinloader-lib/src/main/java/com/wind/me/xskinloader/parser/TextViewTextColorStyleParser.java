@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class TextViewTextColorStyleParser implements ISkinStyleParser{
 
-    private static int[] sTextViewStyleList;
-    private static int sTextViewTextColorStyleIndex;
+    private static int[] sTextViewStyleList=null;
+    private static Integer sTextViewTextColorStyleIndex=null;
 
     @Override
     public void parseXmlStyle(View view, AttributeSet attrs, Map<String, SkinAttr> viewAttrs, String[] specifiedAttrList) {
@@ -31,7 +31,10 @@ public class TextViewTextColorStyleParser implements ISkinStyleParser{
         }
         Context context = view.getContext();
         int[] textViewStyleable = getTextViewStyleableList();
-        int textViewStyleableTextColor = getTextViewTextColorStyleableIndex();
+        Integer textViewStyleableTextColor = getTextViewTextColorStyleableIndex();
+        if(textViewStyleable==null||textViewStyleableTextColor==null){
+            return;
+        }
 
         TypedArray a = context.obtainStyledAttributes(attrs, textViewStyleable, 0, 0);
         if (a != null) {
@@ -58,7 +61,7 @@ public class TextViewTextColorStyleParser implements ISkinStyleParser{
         return sTextViewStyleList;
     }
 
-    private static int getTextViewTextColorStyleableIndex() {
+    private static Integer getTextViewTextColorStyleableIndex() {
         if (sTextViewTextColorStyleIndex == 0) {
             Object o = ReflectUtils.getField("com.android.internal.R$styleable", "TextView_textColor");
             if (o != null) {

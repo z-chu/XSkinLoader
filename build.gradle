@@ -7,8 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.novoda:bintray-release:0.9.1'
+        classpath 'com.android.tools.build:gradle:4.1.1'
+       // classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
 
@@ -26,7 +26,7 @@ allprojects {
     }
 }
 
-ext {
+/*ext {
     userOrg = 'windysha'
     groupId = 'com.windysha.xskinloader'
     repoName = 'xskinloader'
@@ -34,7 +34,7 @@ ext {
     desc = 'This is an android library that can used to change the app resource dynamically.'
     website = 'https://github.com/WindySha/XSkinLoader'
     licences = ['Apache-2.0']
-}
+}*/
 
 task clean(type: Delete) {
     delete rootProject.buildDir
